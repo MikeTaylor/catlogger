@@ -30,8 +30,8 @@ Category names may not contain commas, and typically consist entirely of letters
 
 ```
 import "github.com/MikeTaylor/catlogger"
-logger *catlogger.Logger
-logger := catlogger.MakeLogger("listen,action")
+var logger *catlogger.Logger
+logger = catlogger.MakeLogger("listen,action")
 logger.Log("config", fmt.Sprintf("%+v", cfg)) // Does not emit a message
 logger.Log("listen", fmt.Sprintf("Listen port %d", port)) // Emits a message
 ```
