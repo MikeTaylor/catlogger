@@ -1,14 +1,13 @@
 lint:
 	go vet ./...
 
-# For this to work, we need:
+# For superlint to work, we need:
 # go install honnef.co/go/tools/cmd/staticcheck@latest
 # go install golang.org/x/tools/go/analysis/passes/shadow/cmd/shadow@latest
 # go install github.com/kisielk/errcheck@latest
-# go get github.com/gordonklaus/ineffassign
-# go get github.com/tsenart/deadcode
-# go install github.com/tsenart/deadcode@latest
-
+# go install github.com/gordonklaus/ineffassign@latest
+# go install github.com/remyoudompheng/go-misc/deadcode@latest
+#
 superlint:
 	-go vet ./...
 	-go vet -vettool=/Users/mike/go/bin/shadow ./...
