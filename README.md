@@ -30,10 +30,11 @@ Category names may not contain commas, and typically consist entirely of letters
 
 ```
 import "github.com/MikeTaylor/catlogger"
+// ...
 var logger *catlogger.Logger
-logger = catlogger.MakeLogger("listen,action")
-logger.Log("config", fmt.Sprintf("%+v", cfg)) // Does not emit a message
-logger.Log("listen", fmt.Sprintf("Listen port %d", port)) // Emits a message
+logger = catlogger.MakeLogger("listen,action", "", false)
+logger.Log("config", "configuration complete") // Does not emit a message
+logger.Log("listen", fmt.Sprintf("Listen port %d", 12368)) // Emits a message
 ```
 
 This pulls in the library and creates a logger which is configured to emit messages in the categories "listen" and "action". Two messages are logged: one in the "config" category (for which no output will be generated since that category is not configured in the present logger) and one in the "listen" category (which _will_ be emitted).
