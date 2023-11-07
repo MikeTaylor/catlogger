@@ -47,13 +47,13 @@ The API is gratifyingly small: a single class with a constructor and two methods
 
 The constructor returns a logging object which carries a small amount
 of configuration. That configuration is passed in when the object
-is created. The constructor arguments, all optional, are:
+is created. The constructor arguments are:
 
-1. `categories`. A comma-separated list of zero or more short strings, each of which is the name of a logging category. There is no predefined list of such categories: each application is welcome to make up its own.
+1. `categories` (string). A comma-separated list of zero or more short strings, each of which is the name of a logging category. There is no predefined list of such categories: each application is welcome to make up its own.
 
-2. `prefix`. If provided, a short string which is emitted at the beginning of each log message.
+2. `prefix` (string). If provided, a short string which is emitted at the beginning of each log message. If not required, pass an empty string.
 
-3. `timestamp`. A boolean. If true, then an ISO-formatted timestamp is included in each log message.
+3. `timestamp` (boolean). If true, then an ISO-formatted timestamp is included in each log message.
 
 ### Logging
 
