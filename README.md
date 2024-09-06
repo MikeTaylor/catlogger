@@ -1,5 +1,7 @@
 # catlogger - categorical logging for Go
 
+[![0 dependencies!](https://0dependencies.dev/0dependencies.svg)](https://0dependencies.dev)
+
 Copyright (C) 2023
 [Index Data ApS.](https://www.indexdata.com/).
 
