@@ -3,6 +3,7 @@
 ## IN PROGRESS
 
 * Use github.com/stretchr/testify/assert for testing rather than a hand-rolled `assert` function.
+* Support transformations on logged messages. Add a transformation using `logger.AddTransformation(pattern, replacement)`. They are run in the order in which they were added. Fixes #1.
 
 ## [0.0.2](https://github.com/MikeTaylor/catlogger/tree/v0.0.2) (2023-11-08)
 

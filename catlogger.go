@@ -5,6 +5,7 @@
 // two respects:
 //  1. It does not support logging functional arguments
 //  2. It does not have the the setter methods
+// But it surpasses it in supporting transformations
 //
 package catlogger
 
@@ -12,16 +13,23 @@ import "strings"
 import "time"
 import "fmt"
 import "os"
+import "regexp"
 
 // Logger is an opaque structure created by MakeLogger and which
 // encapsulates the configuration passed into that function. Typically
 // a program will make just one of these, and pass it around as
 // necessary.
 //
+type Transformation struct {
+	pattern     *regexp.Regexp
+	replacement string
+}
+
 type Logger struct {
-	categories string
-	prefix     string
-	timestamp  bool
+	categories      string
+	prefix          string
+	timestamp       bool
+	transformations []Transformation
 }
 
 func getCategories(fallback string) string {
@@ -59,8 +67,18 @@ func MakeLogger(categories string, prefix string, timestamp bool) *Logger {
 	logger.categories = getCategories(categories)
 	logger.prefix = prefix
 	logger.timestamp = timestamp
+	logger.transformations = []Transformation{}
 
 	return &logger
+}
+
+// AddTransformation appends a transformation to the configured
+// list. At this time, there is no way to inspect the list or remove
+// an entry.
+//
+func (l *Logger) AddTransformation(pattern *regexp.Regexp, replacement string) {
+	t := Transformation{pattern, replacement}
+	l.transformations = append(l.transformations, t);
 }
 
 // HasCategory returns true is the logger has been configured to
@@ -91,5 +109,11 @@ func (l *Logger) Log(cat string, args ...string) {
 	if l.timestamp {
 		s += time.Now().Format(time.RFC3339) + " "
 	}
-	fmt.Fprintln(os.Stderr, s+"("+cat+")", strings.Join(args, " "))
+
+	message := strings.Join(args, " ")
+	for _, t := range l.transformations {
+		message = t.pattern.ReplaceAllString(message, t.replacement)
+	}
+
+	fmt.Fprintln(os.Stderr, s+"("+cat+")", message)
 }

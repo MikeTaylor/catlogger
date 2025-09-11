@@ -44,7 +44,7 @@ This pulls in the library and creates a logger which is configured to emit messa
 
 ## API
 
-The API is gratifyingly small: a single class with a constructor and two methods (one of which is rarely if ever needed).
+The API is gratifyingly small: a single class with a constructor and three methods (of which only one is usually needed).
 
 ### Constructor
 
@@ -68,6 +68,9 @@ Output is always to standard error.
 
 You can ask a logger whether it has a particular category enabled using `logger.hasCategory(cat)`. This is a rather ugly back-door, but it's necessary for cases where another library does its own logging and you need to create a predicate for it based on the logger's categories.
 
+### Message transformations
+
+A logger can be configured to perform regular-expression transformations on the logged messages -- for example, to remove passwords. A transformation is represented by a regular expression (type `*regexp.Regexp`) and a replacement string. Transformations can be added using `logger.AddTransformation(pattern, replacement)`, and are run in the order in which they are added. At this time, there is no way to inspect the list or remove an entry.
 
 ## Provenance
 
