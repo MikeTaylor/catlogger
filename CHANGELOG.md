@@ -1,6 +1,6 @@
 # Change history for `github.com/MikeTaylor/catlogger`
 
-## IN PROGRESS
+## [0.0.3](https://github.com/MikeTaylor/catlogger/tree/v0.0.3) (2025-09-11)
 
 * Use github.com/stretchr/testify/assert for testing rather than a hand-rolled `assert` function.
 * Support transformations on logged messages. Add a transformation using `logger.AddTransformation(pattern, replacement)`. They are run in the order in which they were added. Fixes #1.
